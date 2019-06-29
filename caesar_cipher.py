@@ -10,7 +10,7 @@ try:
 	shift %= 26
 except ValueError:
 	print("Make sure you enter an integer")
-	exit(1)
+	exit()
 
 ciphertext = ""
 
