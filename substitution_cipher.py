@@ -28,4 +28,5 @@ for letter in plaintext:
 
 print("Your message:", ciphertext)
 
+#sample alphabet
 #qwertyuiopasdfghjklzxcvbnm
