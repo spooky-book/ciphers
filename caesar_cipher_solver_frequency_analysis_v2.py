@@ -36,13 +36,13 @@ def main():
 	mode = mode.strip().lower()
 
 	if mode == '1':
-		file_name = "english_monograms.txt"
+		file_name = "ngrams/english_monograms.txt"
 	elif mode == '2':
-		file_name = "english_bigrams.txt"
+		file_name = "ngrams/english_bigrams.txt"
 	elif mode == '3':
-		file_name = "english_trigrams.txt"
+		file_name = "ngrams/english_trigrams.txt"
 	elif mode == '4':
-		file_name = "english_quadgrams.txt"
+		file_name = "ngrams/english_quadgrams.txt"
 	else: 
 		print("Make sure input is correct")
 		exit()
