@@ -59,7 +59,7 @@ def main():
 
 	print(" Message | Score | Shift")
 	for i in range(26):
-		print(">{} | {:<4.15f} | {}".format(sorted_fitness_scores[i][1], sorted_fitness_scores[i][0][0], sorted_fitness_scores[i][0][1]))
+		print(">{} | {:>4.15f} | {}".format(sorted_fitness_scores[i][1], sorted_fitness_scores[i][0][0], sorted_fitness_scores[i][0][1]))
 
 	
 if __name__ == "__main__":
