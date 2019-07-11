@@ -39,10 +39,10 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	
 	new_key = starter_key
 
-	seen = set()
+	seen = set(starter_key)
 
 	iteration = 0
-	while 1:
+	while iteration < 200:
 		random.shuffle(list(new_key))
 		new_key = "".join(new_key)
 		
@@ -60,6 +60,9 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 			new[num1], new[num2] = new[num2], new[num1]
 
 			new_key = "".join(new)
+
+			if new_key in seen:
+				continue
 			#print(new_key)
 
 			plaintext = substitution(ciphertext_only_letters, new_key)
@@ -77,6 +80,9 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 
 		print("Current highest score is", high_score, "on iteration", iteration)
 		print("This decodes to", substitution(ciphertext, best_key))
+
+	print(seen)
+	print(len(seen))
 
 	return highest
 
