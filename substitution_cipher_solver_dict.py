@@ -33,5 +33,18 @@ def main():
 	print(sorted_ciphertext_word_pattern)
 	print(only_matching_patterns)
 
+	key = list("??????????????????????????")
+
+def substitution(text, key):
+	text = text.strip()
+	new_text = ""
+	for letter in text:
+		if letter.isalpha():
+			new_text += key[ord(letter) - ord('a')]
+		else:
+			new_text += letter
+
+	return new_text
+
 if __name__ == "__main__":
 	main()
