@@ -16,6 +16,12 @@ def load_words_shortened_apostrophe():
 
 	return valid_words
 
+def load_words_common():
+	with open('30k_most_common_words.txt') as word_file:
+		valid_words = set(word_file.read().split())
+
+	return valid_words
+
 def sort_words_length(english_words):
 	#finding the max length of words in this dictionary
 	max_len = max(english_words, key=len)

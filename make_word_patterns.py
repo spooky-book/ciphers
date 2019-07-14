@@ -1,7 +1,7 @@
 from wordgrabber import *
 
-def main():
-	english_words = load_words_shortened()
+def grab_create_all_word_pattern():
+	english_words = load_words_common()
 
 	pattern_dict = {}
 	for word in english_words:
@@ -11,8 +11,10 @@ def main():
 		else:
 			pattern_dict[pattern].append(word)
 
-	for i in pattern_dict:
-		print(i, pattern_dict[i])
+	return pattern_dict
+
+	# for i in pattern_dict:
+	# 	print(i, pattern_dict[i])
 
 
 #takes in a string and returns the word pattern
@@ -30,6 +32,3 @@ def create_word_pattern(word):
 			i += 1
 
 	return word_pattern
-
-if __name__ == "__main__":
-	main()
