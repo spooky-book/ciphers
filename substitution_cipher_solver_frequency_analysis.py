@@ -17,6 +17,8 @@ def main():
 	#randomly shuffles the alphabet
 	random.shuffle(alphabet)
 	#print(alphabet)
+
+	#starter key is random arrangement of alphabet
 	starter_key = "".join(alphabet)
 	print(starter_key)
 
@@ -33,19 +35,24 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	plaintext = substitution(ciphertext_only_letters, starter_key)
 	high_score = calculator.calculate_fitness_score(plaintext)
 	best_key = starter_key
+	print("plaintext:", plaintext, "\nstarter_key:", starter_key, "\nciphertext_only_letters:", ciphertext_only_letters)
 
 	highest = [[high_score, best_key]]
 	print(high_score)
 	
 	new_key = starter_key
 
-	seen = set(starter_key)
+	seen = set()
+	seen.add(starter_key)
 
 	iteration = 0
 	while iteration < 200:
 		random.shuffle(list(new_key))
 		new_key = "".join(new_key)
 		
+		print(new_key)
+		seen.add(new_key)
+
 		iteration += 1
 		i = 0
 		
