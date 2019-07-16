@@ -1,4 +1,6 @@
-#caesar cipher solver frequency analysis (coincidence index)
+# caesar cipher solver frequency analysis (coincidence index)
+# this one is obsolete and doesnt work 
+# go version 2 for working version
 
 import re
 
