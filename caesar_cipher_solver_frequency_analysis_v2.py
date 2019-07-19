@@ -25,8 +25,10 @@ def main():
 
 		all_shifts.append(plaintext)
 
+	# creates a dictionary for fitness scores of all shifts
 	fitness_scores = {}
 
+	# you can choose between how many letters you want to group together
 	print("Enter '1' for monograms")
 	print("Enter '2' for bigrams")
 	print("Enter '3' for trigrams")
@@ -47,12 +49,14 @@ def main():
 		print("Make sure input is correct")
 		exit()
 
+	# this creates an object that will do calculations for healthiness scores
 	calculator = nGramInfo(file_name)
 	
 	for i in range(26):
 		temp = re.sub("[^a-zA-Z']+", "", all_shifts[i])
 		fitness_scores[all_shifts[i]] = [calculator.calculate_fitness_score(temp), i]
 	
+	# sort fitness scores by healthiness
 	sorted_fitness_scores = sorted(((value, key) for (key, value) in fitness_scores.items()), reverse=True)
 
 	print("\nBelow are the 26 shifts of the cipher ordered by most likely the message\n")
