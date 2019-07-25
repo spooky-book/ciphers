@@ -30,7 +30,8 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	
 	#creates object to calculate fitness
 	calculator = create_nGramInfo_class()
-
+	print("\n\n\nCiphertext:", ciphertext)
+	print("Score:", calculator.calculate_fitness_score(ciphertext))
 	#creates a possible plaintext with the starter key
 	plaintext = substitution(ciphertext_only_letters, starter_key)
 	high_score = calculator.calculate_fitness_score(plaintext)
@@ -46,7 +47,7 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	#seen.add(starter_key)
 
 	iteration = 0
-	while iteration < 200:
+	while iteration < 2000:
 		random.shuffle(list(new_key))
 		new_key = "".join(new_key)
 		
@@ -56,8 +57,10 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 		iteration += 1
 		i = 0
 		
-		while i < 10000:
+		while i < 100000:
 			
+			prev_key = new_key
+
 			num1 = num2 = 0
 			while num1 == num2:
 				num1 = random.randint(0, 25)
@@ -72,6 +75,8 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 			#	continue
 			#print(new_key)
 
+			#print("hi")
+
 			plaintext = substitution(ciphertext_only_letters, new_key)
 			new_score = calculator.calculate_fitness_score(plaintext)
 			print(new_score)
@@ -82,15 +87,24 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 				best_key = new_key
 				highest.append([high_score, best_key])
 				#print("yeet")
-			
+			else:
+				new_key = prev_key
+
 			i += 1
 		pdb.set_trace()
 		print("Current highest score is", high_score, "on iteration", iteration)
 		print(best_key)
 		print("This decodes to", substitution(ciphertext_only_letters, best_key))
 
-	#print(seen)
-	#print(len(seen))
+		#print(seen)
+		#print(len(seen))
+		# if len(seen) > 1000000:
+		# 	file = open("seen_keys.txt", "a+")
+		# 	for key in seen:
+		# 		file.write(key+"\n")
+
+		# 	file.close()
+		# 	seen = set()
 
 	return highest
 
