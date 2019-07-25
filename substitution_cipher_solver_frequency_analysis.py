@@ -1,4 +1,4 @@
-import re, random
+import re, random, pdb
 
 from ngram_class import nGramInfo
 
@@ -42,8 +42,8 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	
 	new_key = starter_key
 
-	seen = set()
-	seen.add(starter_key)
+	#seen = set()
+	#seen.add(starter_key)
 
 	iteration = 0
 	while iteration < 200:
@@ -51,7 +51,7 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 		new_key = "".join(new_key)
 		
 		print(new_key)
-		seen.add(new_key)
+		#seen.add(new_key)
 
 		iteration += 1
 		i = 0
@@ -68,14 +68,14 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 
 			new_key = "".join(new)
 
-			if new_key in seen:
-				continue
+			#if new_key in seen:
+			#	continue
 			#print(new_key)
 
 			plaintext = substitution(ciphertext_only_letters, new_key)
 			new_score = calculator.calculate_fitness_score(plaintext)
-
-			seen.add(new_key)
+			print(new_score)
+			#seen.add(new_key)
 
 			if new_score > high_score:
 				high_score = new_score
@@ -84,12 +84,13 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 				#print("yeet")
 			
 			i += 1
-
+		pdb.set_trace()
 		print("Current highest score is", high_score, "on iteration", iteration)
-		print("This decodes to", substitution(ciphertext, best_key))
+		print(best_key)
+		print("This decodes to", substitution(ciphertext_only_letters, best_key))
 
-	print(seen)
-	print(len(seen))
+	#print(seen)
+	#print(len(seen))
 
 	return highest
 
