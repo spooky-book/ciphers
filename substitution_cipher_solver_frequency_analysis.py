@@ -98,10 +98,7 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 
 			i += 1
 
-<<<<<<< HEAD
-=======
 		# pdb.set_trace()
->>>>>>> b8426135833b080e60b08734cacf0f580701cf5e
 		print("Current highest score is", high_score, "on iteration", iteration)
 		print(best_key)
 		print("This decodes to", substitution(ciphertext_only_letters, best_key))
