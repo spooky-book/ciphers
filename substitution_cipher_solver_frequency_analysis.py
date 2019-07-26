@@ -1,4 +1,4 @@
-import re, random
+import re, random#, pdb
 
 from ngram_class import nGramInfo
 
@@ -42,16 +42,19 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	print(high_score)
 	
 	new_key = starter_key
-
+	key = list('abcdefghijklmnopqrstuvwxyz')
 	#seen = set()
 	#seen.add(starter_key)
-
 	iteration = 0
-	while iteration < 1:
-		random.shuffle(list(new_key))
-		new_key = "".join(new_key)
-		
-		print(new_key)
+
+	while iteration < 200:
+		random.shuffle(key)
+		new_key = "".join(key)
+		print("new:", new_key)
+		high_score = calculator.calculate_fitness_score(substitution(ciphertext_only_letters, new_key))
+		best_key = new_key
+		highest.append([high_score, best_key])
+		# print(new_key)
 		#seen.add(new_key)
 
 		iteration += 1
@@ -79,19 +82,26 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 
 			plaintext = substitution(ciphertext_only_letters, new_key)
 			new_score = calculator.calculate_fitness_score(plaintext)
-			print(new_score)
+			# print(new_score)
 			#seen.add(new_key)
 
 			if new_score > high_score:
 				high_score = new_score
 				best_key = new_key
 				highest.append([high_score, best_key])
+				if len(highest) > 1000:
+					sorted(highest)
+					highest = highest[250:]
 				#print("yeet")
 			else:
 				new_key = prev_key
 
 			i += 1
 
+<<<<<<< HEAD
+=======
+		# pdb.set_trace()
+>>>>>>> b8426135833b080e60b08734cacf0f580701cf5e
 		print("Current highest score is", high_score, "on iteration", iteration)
 		print(best_key)
 		print("This decodes to", substitution(ciphertext_only_letters, best_key))
