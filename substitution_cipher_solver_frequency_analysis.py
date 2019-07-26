@@ -24,33 +24,35 @@ def main():
 
 	best_keys = calculate_best_key(ciphertext_only_letters, starter_key, ciphertext)
 	best_keys = sorted(best_keys)
-	print(best_keys)
+	for i in range(len(best_keys)):
+		print("================\n"+"Score:", best_keys[i][0], "\nKey:", best_keys[i][1], "\nDecryption:", substitution(ciphertext, best_keys[i][1]))
+	# print(best_keys)
+
+	print("\n======== BEST GUESS ========")
+	print("Score:", best_keys[-1][0])
+	print("Key:", best_keys[-1][1])
+	print("Decryption:", substitution(ciphertext, best_keys[-1][1]))
 
 def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	
 	#creates object to calculate fitness
 	calculator = create_nGramInfo_class()
 	print("\n\n\nCiphertext:", ciphertext)
-	print("Score:", calculator.calculate_fitness_score(ciphertext))
+	print("Ciphertext Healthiness Score:", calculator.calculate_fitness_score(ciphertext))
 	#creates a possible plaintext with the starter key
-	plaintext = substitution(ciphertext_only_letters, starter_key)
-	high_score = calculator.calculate_fitness_score(plaintext)
-	best_key = starter_key
-	print("plaintext:", plaintext, "\nstarter_key:", starter_key, "\nciphertext_only_letters:", ciphertext_only_letters)
-
-	highest = [[high_score, best_key]]
-	print(high_score)
 	
-	new_key = starter_key
+	highest = []
+	
 	key = list('abcdefghijklmnopqrstuvwxyz')
 	#seen = set()
 	#seen.add(starter_key)
-	iteration = 0
 
-	while iteration < 200:
+	iteration = 0
+	while iteration < 15:
+		print("Iteration:", iteration)
 		random.shuffle(key)
 		new_key = "".join(key)
-		print("new:", new_key)
+		print("new key:", new_key)
 		high_score = calculator.calculate_fitness_score(substitution(ciphertext_only_letters, new_key))
 		best_key = new_key
 		highest.append([high_score, best_key])
@@ -60,7 +62,7 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 		iteration += 1
 		i = 0
 		
-		while i < 100000:
+		while i < 10000:
 			
 			prev_key = new_key
 
@@ -89,9 +91,11 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 				high_score = new_score
 				best_key = new_key
 				highest.append([high_score, best_key])
-				if len(highest) > 1000:
-					sorted(highest)
-					highest = highest[250:]
+				if len(highest) > 20:
+					#print(highest, '\n')
+					highest = sorted(highest)
+					highest = highest[5:]
+					#print(highest, '\n')
 				#print("yeet")
 			else:
 				new_key = prev_key
@@ -102,7 +106,7 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 		print("Current highest score is", high_score, "on iteration", iteration)
 		print(best_key)
 		print("This decodes to", substitution(ciphertext_only_letters, best_key))
-
+		print("\n\n")
 		#print(seen)
 		#print(len(seen))
 		# if len(seen) > 1000000:
@@ -142,7 +146,10 @@ def create_nGramInfo_class():
 def substitution(ciphertext_only_letters, key):
 	plaintext = ""
 	for letter in ciphertext_only_letters:
-		plaintext += key[ord(letter) - ord("a")]
+		if letter.isalpha() == True:
+			plaintext += key[ord(letter) - ord("a")]
+		else:
+			plaintext += letter
 
 	return plaintext
 
