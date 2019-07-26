@@ -1,4 +1,4 @@
-import re, random, pdb
+import re, random
 
 from ngram_class import nGramInfo
 
@@ -47,7 +47,7 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	#seen.add(starter_key)
 
 	iteration = 0
-	while iteration < 2000:
+	while iteration < 1:
 		random.shuffle(list(new_key))
 		new_key = "".join(new_key)
 		
@@ -91,7 +91,7 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 				new_key = prev_key
 
 			i += 1
-		pdb.set_trace()
+
 		print("Current highest score is", high_score, "on iteration", iteration)
 		print(best_key)
 		print("This decodes to", substitution(ciphertext_only_letters, best_key))
