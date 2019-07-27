@@ -57,7 +57,6 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 		best_key = new_key
 		highest.append([high_score, best_key])
 
-		iteration += 1
 		i = 0
 		
 		# this can be increased if solver not solving however changing iteration number should be first
@@ -98,6 +97,7 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 		print(best_key)
 		print("This decodes to", substitution(ciphertext_only_letters, best_key))
 		print("\n\n")
+		iteration += 1
 
 	return highest
 
