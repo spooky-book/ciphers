@@ -17,12 +17,17 @@ We have different python programs that implement basic ciphers and then solve th
 - words without spaces as well
 
 ## Substitution 
-## substitution_cipher.py
+### substitution_cipher.py
 - implementation of the substitution cipher in python, where every instance of a letter will be replaced with another letter
 - once a letter has been used then it cannot be used again
 
-## substitution_cipher_solver_frequency_analysis.py
-
+### substitution_cipher_solver_frequency_analysis.py
+- decrypts ciphertext encrypted using the substitution cipher
+- basically randomly guesses a substitution key and measures its correctness using the fitness score
+- generates future random guesses off the best keys previously guessed
+- increasing the number of iterations which the program runs for will increase its success rate
+- works with spaces or without spaces between the words, words with minor mispellings as well
+- works well with longer messages
 
 # References
 30k_most_common_words.txt
