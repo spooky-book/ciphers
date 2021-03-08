@@ -44,9 +44,11 @@ def calculate_best_key(ciphertext_only_letters, starter_key, ciphertext):
 	# this is the key that is shuffled into a new key every iteration
 	key = list('abcdefghijklmnopqrstuvwxyz')
 
-	# if the thing cant be solved iterations should be increased first
+	iteration_cap = int(input("Enter number of iterations for the process to run (higher number means higher success rate): "))
+
 	iteration = 0
-	while iteration < 15:
+	# if the thing cant be solved iterations should be increased first
+	while iteration < iteration_cap:
 		print("Iteration:", iteration)
 
 		#generates new key and calculates the fitness of the keys associated possible plaintext
